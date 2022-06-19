@@ -10,8 +10,9 @@
    
     @if(isset($illustration))
     <img src="/img/{{$illustration->filename}}" alt="image for chapter">
-    @endif
     <br>
+    @endif
+    
     {!! $chapter->text; !!}
 
     <ul>
@@ -19,6 +20,12 @@
             <li><a href="/{{$choice->goto_id}}"> {{$choice->text}} </a></li>
     @endforeach
     </ul>
+
+    @if($chapter->is_end)
+
+        <p>THE END</p>
+
+    @endif
 
     
 </body>

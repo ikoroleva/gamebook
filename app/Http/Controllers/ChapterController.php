@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chapter;
+use App\Models\Choice;
 use Illuminate\Http\Request;
 
 class ChapterController extends Controller
@@ -16,7 +17,13 @@ class ChapterController extends Controller
     {
         $chapter = Chapter::findOrFail($id);
         $illustration = $chapter->illustration;
-        $choices = $chapter->choices;
+        $choices = Choice::orderBy('order')
+            ->where('chapter_id', '=', $id)->get();
+
+        //$chapter->choices->orderBy('order')->get(); //->toArray();
+
+        // dd($choices);
+
 
         return view('index', compact('chapter', 'illustration', 'choices'));
     }
